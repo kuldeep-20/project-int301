@@ -21,3 +21,11 @@ def filter_layer_from_packet(packet):
     for layer in packet.layers:
         if layer.layer_name == "urlencoded-form":
             extract_login_credentials_from_output_file(packet)
+
+# method to extract the login data from the filtered packet
+def extract_login_credentials_from_output_file(packet):
+    str_packet = str(packet)
+    for line in iter(str_packet.splitlines()):
+        if ("username" in line or "password" in line) and not ("Key" in line or "Value" in line):
+            data = line.strip().split(":")[1].strip()
+            print(data)
